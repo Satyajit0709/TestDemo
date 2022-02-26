@@ -1,0 +1,176 @@
+###
+1.  Use sort and uniq command to sort a file and print unique values.
+sort record.txt | uniq
+
+2. How to Redirect stderr to stdout in Bash
+In Bash and other Linux shells, when a program is executed, it uses three standard I/O streams. Each stream is represented by a numeric file descriptor:
+
+0 - stdin, the standard input stream.
+1 - stdout, the standard output stream.
+2 - stderr, the standard error stream.
+A file descriptor is just a number representing an open file.
+
+When we use |   , then only stdout contents will be copied to the file , when you use |& then both stdout and stderr will be copied to the files.
+
+3. To run the command in background use &
+
+4. sed command    (Stream Editor)
+sed -e     === this commmand can be used to execute multiple sed commands in single commands
+sed -e 's/foo/bar/g' -e 'd/foo'
+
+
+5. Mount and Unmount filesystem on Linux
+first create a directoty in your Local drive 
+mkdir  /cs/ctc/ctc_share
+mount  /path/to/Drive /cs/ctc/ctc_share  
+umount  /cs/ctc/ctc_share
+
+6.  blkid --- to find out the ID of the Drive .
+
+7. Yum command and their options 
+yum -- downloadonly      ---this option will only download the package and not install on Unix.
+sudo apt-get install geary   -- this will install the geary  application 
+
+
+8. LVM    -- logical Volume Manager ... It is used to manage the size of the Volume 
+vgextend allows you to add one or more initialized physical volumes (see pvcreate(8)) to an existing volume group to extend it in size.
+The following command adds the physical volume /dev/sdf1 to the volume group vg1.
+# vgextend vg1 /dev/sdf1
+
+9. Commands which will show the IP addresses 
+	1. ifconfig    ---- will show the IP address and other information
+	2. Uptime   --- it will show how long the server is Uptime.
+	3. ping   --- It will try to connect to the given Link and will show the response time .
+	4. traceroute - The traceroute command will attempt to provide a list of all the routers your connections cross when reaching out to a remote system.
+	5. netstat   --  The netstat command can tell you about ongoing connections on the local system and ports (i.e., services) that are listening, indicating that services are waiting for requests to come through
+	6. nslookup  -- this command will resolve the DNS Name for the server name.
+	7. whois    --- provide lot of information about the given link
+	8. hostname -- names of the system where we have logged in
+	9. tcpdump  -- The tcpdump command can print out the headers of network packets as they reach your server 
+	10. free  -- shows the memory utilizations status
+	11. Top -- shows the top procesess running 
+
+10. Ports  -- ports are used to run dedicated service at dedicated server .
+	53  -- DNS Server 
+	NFS Service 
+
+11. /etc/password    -- All user information stored in this file.   Home directory for users are also defined under this file , shell the user will be using.
+    /etc/shell -- password stored in this file in encrypted format 
+	/etc/group 
+12. Cron Jobs 
+	how to see the cron jobs --- Crontab -e 
+	/var/log   --- will have all the Log of the cron jobs 
+	/var/log  -- It will have system Logs 
+13. Linux Boot process 
+	BIOS -  Basic Input Output service 
+	POST -- Power on Self Test started 
+	MBR   -- MAster Boot records
+		Information is stored at entry point of Hard disk , location of the GRUB 2
+	GRUB2 -- Grand Unified Boot Loader V2    it loads the Unix Kernel
+		Unix Kernel loads allthe Drivers , and then start very first process  , Systemd (System Demon -- PID #1)
+13  RAID -- Redundant Array of Indepndent Disks
+	RAID0 -- can add multiple disks + can loose the Data
+	RAID1 -- Each disk will have its replication , but it will slow 
+	RAID5 -- Each additional Disc will be used for mirror as well as additional
+
+14 NIC Bonding  -- Netwrok Interface Cord    --- Port which connect you to internet connection 
+	2 New cord bond together , if one goes down other one starts , NIC Drivers are allowed to do bonding  
+15. Http server configuration  -- 
+	command  -- rpm -qa       this will list down all the services present in the server 
+	         yum install http     -- this will install apache Http 
+			 /etc directory will have configuration file for all the installed softwares 
+			 
+16. Archiving
+	zip Zip_file_name  File_name_to_be_zipped
+	gzip  File_name_to_be_zipped
+	tar -tvf  tar_fie_name |grep -i filename   --> this will give the file name to be searched in the 
+	tar -zvxf file_name to be extracted from .gz 
+
+17. to Encrypt and decrypt the passowod 
+openssl enc 
+
+18. to access the website 
+curl 
+
+19. find out particular column in the delinited file
+cut -d {Delimiter}  -f {Column Number} file.txt
+
+20 . Difference Betweeen df and du
+df -- disk fragment -- after execution it will show the space utilized by all the drives in the disks 
+du -- Disc Utilization -- after execution it will show space used by all the folders inside the disk. 
+-h option will sh
+
+21 . Default Directories in the Linux
+	/var directory -- 
+	/Opt Directory --- this directory will have all add on softwares in Linux 
+	/etc
+22. Cut command 
+	This will cut the portion of the string and display the particlar columns . By default 'TAB' os considered as separator
+	1. Cut file_name.txt -f 1,3   --> this will display first and third column with TAB Seperated in the file
+	2. cut file_name.txt -d ':' -f 1,3  --> this will display first and third column with : Seperated in the file
+	3. cut file_name.txt -d ':' -f 1,3 --complement -->  except column 1 and 3 it will display all the values 
+	4. cut file_name.txt -d ':' -f 1,3 --output-delimiter ='_'  --> displays the 1,3 columns and the use the given delimiter for output text.
+	5. echo "ABCDEFGHIJKLMNOP" | cut -b 5,7,9,10 --> Output EGIJ
+	6. echo "ABCDEFGHIJKLMNOP" | cut -b 1-5   --> ABCDE
+			N the Nth field, byte or character, starting from 1.
+			N- from the Nth field, byte or character, to the end o	of the line.
+			N-M from the Nth to the Mth field, byte, or character.
+			-M from the first to the Mth field, byte, or character
+23. Sed command 
+		sed 's/unix/linux/' geekfile.txt   --> Substitute Unix with Linux in the file .  it will replace only first occurance of the word.
+		sed 's/unix/linux/2' geekfile.txt    --> replace the 2nd occurance of each line.
+		sed 's/unix/linux/g' geekfile.txt   -- replace all occurances 
+		sed 's/unix/linux/3g' geekfile.txt   --> replacing 3rd to all occuarances 
+		sed '3 s/unix/linux/' geekfile.txt   --> replace the first character of the 3rd Line 
+		sed 's/unix/linux/p' geekfile.txt  --> Duplicate the Line
+		Deleting the line
+			sed '5d' filename.txt   -> delete 5th number line 
+			sed '$d' filename.txt   --> delete Last Line 
+			sed '3,6d' filename.txt   -- 3-6 Line 
+			sed '12,$d' filename.txt   --> 12 to Last line 
+			sed '/abc/d' filename.txt   --> delete the line with pattern abc
+		sed -i s/$/:80/ file.txt   --> This will ad the ':80' at the end of the each line 
+24. find command
+		find . -name file_name.txt   --> seach for file in current as well as Sub directories 
+		find . -iname file_name.txt    --> Ignore the case and search for the file.
+		find . -type d -name file_name   --> search for a Directory name.
+		find . -type f -perm 0777 -print   -> print all the file name with 777 permissions
+		find . -perm /g=s    --> find all SGID files 
+		find . -perm /u=s   --> find all  SUID Files.
+		find . -perm /u=r   -- find all read only files 
+		find . -type f -perm 0777 -print -exec chmod 644 {} \;   --> this will print the file with 777 permissions and later change it to 644
+		find . -type f -name "tecmint.txt" -exec rm -f {} \;   --> find and remove the file matching  this pattern .
+		find . -type f -empty  --> find all empty files 
+		find . -type f -name ".*"  --> find all  hidden files 
+		find . -user tecmint  --> find all the files and directories  with  
+		find . -mtime  50 -->    find . -atime  50 -->  find . -cmin  60   List down all files older than 50 days 
+		find . -mtime +50 -mtime -100 --> List down all files older than 50 days  and NOt Older thasn 100 days
+25. grep commands	
+		grep -i "UNix" geekfile.txt   -->  will ingore the case 
+		grep -c "unix" geekfile.txt   --> number of lines that matches the string
+		grep -l "unix" *  --> list all the files which has this pattern
+		grep -w "unix" geekfile.txt  --> instead of checking the pattern it will check for Whole word 
+		grep -o "unix" geekfile.txt  --> display only the matching pattern
+		grep -n "unix" geekfile.txt   -> Show the Line numbers as well  with complete line
+		grep -v "unix" geekfile.txt  --> display the lines which does not match the patten 
+		grep "os$" geekfile.txt  -- shows the lines which ends with this.
+		grep –e "Agarwal" –e "Aggarwal" –e "Agrawal" geekfile.txt   --> can search multiple patterns at the same time 
+		grep –f pattern.txt  geekfile.txt  --> this pattern.txt will have all the search pattens 
+		grep -A[NumberOfLines(n)] [search] [file]  --> N rows after the search pattern found 
+		grep -B[NumberOfLines(n)] [search] [file]  --> N rows Before the search pattern found
+		grep -C[NumberOfLines(n)] [search] [file]  --> N rows Before and After the search pattern found
+		
+		
+			
+23. Miscellanious commands
+	getent passwd  --- To get a list of all Linux user 
+	SGID   -- Special permissions at Group Level 
+	Sticky Bit  
+	SUID  -- Special permissions at user Level 
+	
+	Add one character at the end of the file 
+HeapStats -- 
+Check the Unix Version 
+Netstat 200 
+Difference between Awk and sed command 
+	
